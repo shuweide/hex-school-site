@@ -127,4 +127,5 @@
 .course li p {
   line-height: 1.5;
   font-size: 16px;
+  text-align: justify;
 }
