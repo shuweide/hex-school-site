@@ -1,2 +1,6 @@
 let cookiePrice = 35;
-document.getElementById('price').textContent=cookiePrice;
+let myMoney = 15;
+let total = cookiePrice - myMoney;
+document.getElementById('cookiePriceId').textContent=cookiePrice;
+document.getElementById('myMoneyId').textContent=myMoney;
+document.getElementById('totalId').textContent=total;
