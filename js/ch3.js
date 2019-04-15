@@ -1,2 +1,1 @@
-let cookiePrice = 35;
-document.getElementById('price').textContent=cookiePrice;
+document.getElementById('title1').textContent='修改後的標題';
