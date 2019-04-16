@@ -79,3 +79,11 @@ html{
 .wrap-inner .tag{
     color: yellow
 }
+
+.wrap-inner input{
+  width: 50px;
+}
+
+#totalId {
+  color: chartreuse;
+}
