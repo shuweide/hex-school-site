@@ -5215,19 +5215,36 @@ let data = [{
   "核定總招收人數": "60"
 }];
 
-let 行政區 = '清水區';
+let 行政區 = '大里區';
 let titleElement = document.querySelector('#title');
 titleElement.textContent = 行政區 + '幼稚園';
 
 let content = '';
-for(let i =0; i<data.length; i++){
-  if(data[i].行政區 === 行政區) {
-    content += '<li>' + data[i].幼兒園名稱 + '</li>';
+let j = 0;
+for (let i = 0; i < data.length; i++) {
+  if (data[i].行政區 === 行政區) {
+    content += '<li><a href="#" class="link">' + j++ + '、' + data[i].幼兒園名稱 + '</a></li>';
   }
 }
 let listElement = document.querySelector('.list');
 listElement.innerHTML = content;
 
+//設定最後一個預設行為不發生
+let links = document.querySelectorAll('.link');
+links[j -1].addEventListener('click', function (e) {
+  
+  //submit 按鈕，先透過我的js去查詢表單有無錯誤，post去傳送
+  e.preventDefault();
+  e.stopPropagation();
+}, false);
+
+
 let subTitle = document.createElement('em');
 subTitle.textContent = '公私立';
 titleElement.appendChild(subTitle);
+
+titleElement.addEventListener('click', function (e) {
+  e.stopPropagation(); //阻止事件氣泡往外找
+  alert('click title');
+}, false); //false為事件氣泡
+
