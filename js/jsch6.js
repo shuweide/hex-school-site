@@ -5215,9 +5215,19 @@ let data = [{
   "核定總招收人數": "60"
 }];
 
-// 查詢西屯區的幼稚園
-for (let i = 0; i < data.length; i++) {
-  if (data[i].行政區 === '南屯區') {
-    console.log(data[i].行政區 + ';' + data[i].幼兒園名稱 + ';' + data[i].幼兒園住址);
+let 行政區 = '清水區';
+let titleElement = document.querySelector('#title');
+titleElement.textContent = 行政區 + '幼稚園';
+
+let content = '';
+for(let i =0; i<data.length; i++){
+  if(data[i].行政區 === 行政區) {
+    content += '<li>' + data[i].幼兒園名稱 + '</li>';
   }
 }
+let listElement = document.querySelector('.list');
+listElement.innerHTML = content;
+
+let subTitle = document.createElement('em');
+subTitle.textContent = '公私立';
+titleElement.appendChild(subTitle);
