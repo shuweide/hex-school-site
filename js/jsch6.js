@@ -5246,6 +5246,9 @@ titleElement.appendChild(subTitle);
 
 titleElement.addEventListener('click', function (e) {
   e.stopPropagation(); //阻止事件氣泡往外找
-  alert('click title');
+  console.log(e.target.dataset);
 }, false); //false為事件氣泡
+
+localStorage.setItem('行政區', 行政區);
+console.log(localStorage.getItem('行政區'));
 
