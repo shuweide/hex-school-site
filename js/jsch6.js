@@ -5236,6 +5236,7 @@ links[j -1].addEventListener('click', function (e) {
   //submit 按鈕，先透過我的js去查詢表單有無錯誤，post去傳送
   e.preventDefault();
   e.stopPropagation();
+  console.log(e.target);
 }, false);
 
 
