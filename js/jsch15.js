@@ -13,8 +13,6 @@ xhr.onload = function () {
 };
 
 let postHexSchoolApi = function (e) {
-  e.preventDefault();
-  e.stopPropagation();
   let account = document.querySelector('#accountId').value;
   let password = document.querySelector('#passwordId').value;
   console.log(account);
@@ -40,12 +38,14 @@ let postHexSchoolApi = function (e) {
   xhr2.send(body);
   xhr2.onload = function () {
     console.log(xhr2.responseText);
+    let response = JSON.parse(xhr2.responseText);
+    alert(response.message);
   };
 };
 
 //Form Click
 document.querySelector('#submitFormId')
-  .addEventListener('click', postHexSchoolApi, false);
+    .addEventListener('click', postHexSchoolApi, false);
 //Json Click
 document.querySelector('#submitJsonId')
-  .addEventListener('click', postHexSchoolApi, false);
+    .addEventListener('click', postHexSchoolApi, false);
