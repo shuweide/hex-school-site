@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>JS Google Map</title>
+  <meta name="viewport" content="initial-scale=1.0">
+  <meta charset="utf-8">
+  <style>
+    /* Always set the map height explicitly to define the size of the div
+     * element that contains the map. */
+    #map {
+      height: 100%;
+    }
+
+    /* Optional: Makes the sample page fill the window. */
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+  let map;
+
+  //24.1377664,120.6421859,15z
+  function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: 24.1377664, lng: 120.6421859},
+      zoom: 15
+    });
+    let marker = new google.maps.Marker({
+      position : {lat: 24.144035, lng: 120.641943},
+      map: map,
+      title: 'Marker Test'
+    })
+  }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZStV_g63267H2_ZnNQXqH1_GFe0CEdpE&callback=initMap"
+        async defer></script>
+</body>
+</html>
