@@ -30,11 +30,22 @@
       center: {lat: 24.1377664, lng: 120.6421859},
       zoom: 15
     });
-    let marker = new google.maps.Marker({
-      position : {lat: 24.144035, lng: 120.641943},
-      map: map,
-      title: 'Marker Test'
-    })
+    //24.1377664,120.6421859
+    let data = [
+      {
+        position: {lat: 24.144035, lng: 120.641943},
+        map: map,
+        title: 'Marker 1'
+      },
+      {
+        position: {lat: 24.1377664, lng: 120.6421859},
+        map: map,
+        title: 'Marker 2'
+      }
+    ];
+    for(let i = 0; i < data.length; i++){
+      new google.maps.Marker(data[i]);
+    }
   }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZStV_g63267H2_ZnNQXqH1_GFe0CEdpE&callback=initMap"
