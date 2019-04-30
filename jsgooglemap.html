@@ -134,17 +134,23 @@
         }
       ]
     });
-    //24.1377664,120.6421859
+
+    let image = {
+      url: 'images/mummy.svg'
+    };
+
     let data = [
       {
         position: {lat: 24.144035, lng: 120.641943},
         map: map,
-        title: 'Marker 1'
+        title: 'Marker 1',
+        icon: image
       },
       {
         position: {lat: 24.1377664, lng: 120.6421859},
         map: map,
-        title: 'Marker 2'
+        title: 'Marker 2',
+        icon: image
       }
     ];
     for (let i = 0; i < data.length; i++) {
