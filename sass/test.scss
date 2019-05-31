@@ -1,5 +1,10 @@
-$primary-color:red;
+$primary-color: blue;
 
-body{
-    color: $primary-color;
+body {
+  color: $primary-color;
+}
+
+.card {
+  transform: rotate(120deg);
+  filter: blur(3);
 }
