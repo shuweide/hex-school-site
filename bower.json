@@ -1,0 +1,21 @@
+{
+  "name": "hex-school-site",
+  "description": "hex school practice",
+  "main": "index.js",
+  "authors": [
+    "shuwei.kuo <shuweide@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/shuweide/hex-school-site",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.4.1"
+  }
+}
