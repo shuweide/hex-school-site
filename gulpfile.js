@@ -7,6 +7,7 @@ const $ = require('gulp-load-plugins')(); //針對gulp開頭的套件作自動�
 // const babel = require('gulp-babel');
 const autoprefixer = require('autoprefixer');
 const mainBowerFiles = require('main-bower-files');
+const browserSync = require('browser-sync').create();
 
 gulp.task('copyHTML', function () {
   return gulp.src('./*.html')
@@ -21,9 +22,10 @@ gulp.task('jade', function () {
       pretty: true
     }))
     .pipe(gulp.dest('./public/'))
+    .pipe(browserSync.stream());
 });
 
-gulp.task('sass', function () {
+gulp.task('sass', () => {
 
   let plugins = [
     autoprefixer({ browsers: ['last 1 version'] })
@@ -36,7 +38,8 @@ gulp.task('sass', function () {
     //編譯完成 CSS
     .pipe($.postcss(plugins))
     .pipe($.sourcemaps.write('../maps'))
-    .pipe(gulp.dest('./public/css'));
+    .pipe(gulp.dest('./public/css'))
+    .pipe(browserSync.stream());
 });
 
 gulp.task('babel', () =>
@@ -49,8 +52,10 @@ gulp.task('babel', () =>
     .pipe($.concat('all.js')) //把全部js合併成一個檔案
     .pipe($.sourcemaps.write('../maps'))
     .pipe(gulp.dest('./public/js'))
+    .pipe(browserSync.stream())
 );
 
+//Bower
 gulp.task('bower', function() {
   return gulp.src(mainBowerFiles())
       .pipe(gulp.dest('./.tmp/vendors'))
@@ -62,12 +67,19 @@ gulp.task('vendors', () =>
     .pipe(gulp.dest('./public/js'))
 );
 
-//監控Sass
-gulp.task('watch', function () {
+// Static server
+gulp.task('browser-sync', function() {
+  browserSync.init({
+      server: {
+          baseDir: "./public"
+      }
+  });
+
+  //監控檔案變化
   gulp.watch('./sass/**/*.scss', gulp.series('sass'));
   gulp.watch('./jade/**/*.jade', gulp.series('jade'));
   gulp.watch('./js/**/gulptest*.js', gulp.series('babel'));
 });
 
 //合併task
-gulp.task('default', gulp.series('jade', 'sass', 'babel', 'bower', 'vendors', 'watch'));
+gulp.task('default', gulp.series('jade', 'sass', 'babel', 'bower', 'vendors','browser-sync'));
