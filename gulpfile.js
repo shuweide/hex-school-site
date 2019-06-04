@@ -8,6 +8,16 @@ const $ = require('gulp-load-plugins')(); //針對gulp開頭的套件作自動�
 const autoprefixer = require('autoprefixer');
 const mainBowerFiles = require('main-bower-files');
 const browserSync = require('browser-sync').create();
+const minimist = require('minimist');
+
+const envOptions = {
+  string: 'env',
+  default: { env: 'dev' }
+}
+
+const options = minimist(process.argv.slice(2), envOptions);
+console.log(options);
+console.log(process.argv.slice(2));
 
 gulp.task('copyHTML', function () {
   return gulp.src('./*.html')
@@ -37,6 +47,7 @@ gulp.task('sass', () => {
     .pipe($.sass().on('error', $.sass.logError))
     //編譯完成 CSS
     .pipe($.postcss(plugins))
+    .pipe($.if(options.env === 'prod', $.minifyCss()))
     .pipe($.sourcemaps.write('../maps'))
     .pipe(gulp.dest('./public/css'))
     .pipe(browserSync.stream());
@@ -50,29 +61,36 @@ gulp.task('babel', () =>
       presets: ['@babel/env']
     }))
     .pipe($.concat('all.js')) //把全部js合併成一個檔案
+    .pipe($.if(options.env === 'prod', $.uglify({
+      compress: {
+        drop_console: true
+      }
+    })))
     .pipe($.sourcemaps.write('../maps'))
     .pipe(gulp.dest('./public/js'))
     .pipe(browserSync.stream())
 );
 
 //Bower
-gulp.task('bower', function() {
+gulp.task('bower', function () {
   return gulp.src(mainBowerFiles())
-      .pipe(gulp.dest('./.tmp/vendors'))
+    .pipe(gulp.dest('./.tmp/vendors'))
 });
 
-gulp.task('vendors', () => 
+gulp.task('vendors', () =>
   gulp.src('./.tmp/vendors/**/**.js')
     .pipe($.concat('vendors.js'))
+    .pipe($.if(options.env === 'prod', $.uglify()))
     .pipe(gulp.dest('./public/js'))
 );
 
 // Static server
-gulp.task('browser-sync', function() {
+gulp.task('browser-sync', function () {
   browserSync.init({
-      server: {
-          baseDir: "./public"
-      }
+    server: {
+      baseDir: "./public",
+      reloadDebounce: 2000
+    }
   });
 
   //監控檔案變化
@@ -81,5 +99,11 @@ gulp.task('browser-sync', function() {
   gulp.watch('./js/**/gulptest*.js', gulp.series('babel'));
 });
 
+//Clean
+gulp.task('clean', () => {
+  return gulp.src(['./.tmp', './public'], { read: false, allowEmpty: true})
+    .pipe($.clean());
+})
+
 //合併task
-gulp.task('default', gulp.series('jade', 'sass', 'babel', 'bower', 'vendors','browser-sync'));
+gulp.task('default', gulp.series('clean','jade', 'sass', 'babel', 'bower', 'vendors', 'browser-sync'));
