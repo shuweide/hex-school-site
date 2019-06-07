@@ -42,7 +42,7 @@ gulp.task('sass', () => {
     .pipe($.plumber())
     .pipe($.sass().on('error', $.sass.logError))
     //編譯完成 CSS
-    .pipe($.postcss([ autoprefixer() ]))
+    .pipe($.postcss([autoprefixer()]))
     .pipe($.if(options.env === 'prod', cleanCSS()))
     .pipe($.sourcemaps.write('../maps'))
     .pipe(gulp.dest('./public/css'))
@@ -109,7 +109,7 @@ gulp.task('image-min', () =>
 );
 
 //快速發布GitHub Pages
-gulp.task('deploy', function() {
+gulp.task('deploy', function () {
   return gulp.src('./public/**/*')
     .pipe($.ghPages());
 });
