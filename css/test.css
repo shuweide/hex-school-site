@@ -1,0 +1,9 @@
+body {
+  color: #994bff; }
+
+.card {
+  transform: rotate(120deg);
+  -webkit-filter: blur(3);
+          filter: blur(3); }
+
+/*# sourceMappingURL=../maps/test.css.map */
