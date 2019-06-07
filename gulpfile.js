@@ -112,5 +112,11 @@ gulp.task('image-min', () =>
     .pipe(gulp.dest('./public/images'))
 );
 
+//快速發布GitHub Pages
+gulp.task('deploy', function() {
+  return gulp.src('./public/**/*')
+    .pipe($.ghPages());
+});
+
 //合併task
 gulp.task('default', gulp.series('clean', 'jade', 'sass', 'babel', 'bower', 'vendors', 'image-min', 'browser-sync'));
