@@ -26,6 +26,12 @@ gulp.task('copyHTML', function () {
     .pipe(gulp.dest('./public/'))
 });
 
+gulp.task('copyCNAME', function () {
+  return gulp.src('./CNAME')
+    .pipe($.plumber())
+    .pipe(gulp.dest('./public/'))
+});
+
 gulp.task('jade', function () {
   return gulp.src('./jade/**/*.jade')
     .pipe($.plumber())
@@ -33,7 +39,7 @@ gulp.task('jade', function () {
       pretty: true
     }))
     .pipe(gulp.dest('./public/'))
-    .pipe(browserSync.stream());
+    .pipe(browserSync.stream())
 });
 
 gulp.task('sass', () => {
@@ -46,17 +52,27 @@ gulp.task('sass', () => {
     .pipe($.if(options.env === 'prod', cleanCSS()))
     .pipe($.sourcemaps.write('../maps'))
     .pipe(gulp.dest('./public/css'))
-    .pipe(browserSync.stream());
+    .pipe(browserSync.stream())
+});
+
+gulp.task('css', () => {
+  return gulp.src('./css/**/*.css')
+    .pipe($.sourcemaps.init())
+    .pipe($.plumber())
+    .pipe($.postcss([autoprefixer()]))
+    .pipe($.if(options.env === 'prod', cleanCSS()))
+    .pipe($.sourcemaps.write('../maps'))
+    .pipe(gulp.dest('./public/css'));
 });
 
 gulp.task('babel', () =>
-  gulp.src('./js/**/gulptest*.js')
+  gulp.src('./js/**/*.js')
     .pipe($.sourcemaps.init())
     .pipe($.plumber())
     .pipe($.babel({
       presets: ['@babel/env']
     }))
-    .pipe($.concat('all.js')) //把全部js合併成一個檔案
+    // .pipe($.concat('all.js')) //把全部js合併成一個檔案
     .pipe($.if(options.env === 'prod', $.uglify({
       compress: {
         drop_console: true
@@ -68,17 +84,17 @@ gulp.task('babel', () =>
 );
 
 //Bower
-gulp.task('bower', function () {
-  return gulp.src(mainBowerFiles())
-    .pipe(gulp.dest('./.tmp/vendors'))
-});
+// gulp.task('bower', function () {
+//   return gulp.src(mainBowerFiles())
+//     .pipe(gulp.dest('./.tmp/vendors'))
+// });
 
-gulp.task('vendors', () =>
-  gulp.src('./.tmp/vendors/**/**.js')
-    .pipe($.concat('vendors.js'))
-    .pipe($.if(options.env === 'prod', $.uglify()))
-    .pipe(gulp.dest('./public/js'))
-);
+// gulp.task('vendors', () =>
+//   gulp.src('./.tmp/vendors/**/**.js')
+//     .pipe($.concat('vendors.js'))
+//     .pipe($.if(options.env === 'prod', $.uglify()))
+//     .pipe(gulp.dest('./public/js'))
+// );
 
 // Static server
 gulp.task('browser-sync', function () {
@@ -92,10 +108,10 @@ gulp.task('browser-sync', function () {
   //監控檔案變化
   gulp.watch('./sass/**/*.scss', gulp.series('sass'));
   gulp.watch('./jade/**/*.jade', gulp.series('jade'));
-  gulp.watch('./js/**/gulptest*.js', gulp.series('babel'));
+  gulp.watch('./js/**/*.js', gulp.series('babel'));
 });
 
-//Clean
+//Clean Default
 gulp.task('clean', () => {
   return gulp.src(['./.tmp', './public'], { read: false, allowEmpty: true })
     .pipe($.clean());
@@ -103,7 +119,7 @@ gulp.task('clean', () => {
 
 //圖片壓縮很耗時，所以建議在prod時再壓縮
 gulp.task('image-min', () =>
-  gulp.src('./images/banner.png')
+  gulp.src('./images/**/*.*')
     .pipe($.if(options.env === 'prod', $.imagemin()))
     .pipe(gulp.dest('./public/images'))
 );
@@ -115,4 +131,4 @@ gulp.task('deploy', function () {
 });
 
 //合併task
-gulp.task('default', gulp.series('clean', 'jade', 'sass', 'babel', 'bower', 'vendors', 'image-min', 'browser-sync'));
+gulp.task('default', gulp.series('clean', 'copyHTML', 'copyCNAME', 'jade', 'sass', 'css', 'babel', 'image-min', 'browser-sync'));
