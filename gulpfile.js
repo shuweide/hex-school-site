@@ -101,9 +101,16 @@ gulp.task('browser-sync', function () {
 
 //Clean
 gulp.task('clean', () => {
-  return gulp.src(['./.tmp', './public'], { read: false, allowEmpty: true})
+  return gulp.src(['./.tmp', './public'], { read: false, allowEmpty: true })
     .pipe($.clean());
-})
+});
+
+//圖片壓縮很耗時，所以建議在prod時再壓縮
+gulp.task('image-min', () =>
+  gulp.src('./images/banner.png')
+    .pipe($.if(options.env === 'prod', $.imagemin()))
+    .pipe(gulp.dest('./public/images'))
+);
 
 //合併task
-gulp.task('default', gulp.series('clean','jade', 'sass', 'babel', 'bower', 'vendors', 'browser-sync'));
+gulp.task('default', gulp.series('clean', 'jade', 'sass', 'babel', 'bower', 'vendors', 'image-min', 'browser-sync'));
