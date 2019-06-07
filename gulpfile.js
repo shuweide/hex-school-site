@@ -9,6 +9,7 @@ const autoprefixer = require('autoprefixer');
 const mainBowerFiles = require('main-bower-files');
 const browserSync = require('browser-sync').create();
 const minimist = require('minimist');
+const cleanCSS = require('gulp-clean-css');
 
 const envOptions = {
   string: 'env',
@@ -36,18 +37,13 @@ gulp.task('jade', function () {
 });
 
 gulp.task('sass', () => {
-
-  let plugins = [
-    autoprefixer({ browsers: ['last 1 version'] })
-  ];
-
   return gulp.src('./sass/**/*.scss')
     .pipe($.sourcemaps.init())
     .pipe($.plumber())
     .pipe($.sass().on('error', $.sass.logError))
     //編譯完成 CSS
-    .pipe($.postcss(plugins))
-    .pipe($.if(options.env === 'prod', $.minifyCss()))
+    .pipe($.postcss([ autoprefixer() ]))
+    .pipe($.if(options.env === 'prod', cleanCSS()))
     .pipe($.sourcemaps.write('../maps'))
     .pipe(gulp.dest('./public/css'))
     .pipe(browserSync.stream());
