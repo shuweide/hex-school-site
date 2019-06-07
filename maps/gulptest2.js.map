@@ -1,1 +1,1 @@
-{"version":3,"sources":["gulptest2.js"],"names":["newFun2","console"],"mappings":"aAAA,IAAIA,QAAU,aACVC","file":"../js/gulptest2.js","sourcesContent":["let newFun2 = () => {\r\n    console.log('b');\r\n}\r\nnewFun2();"]}
+{"version":3,"sources":["gulptest2.js"],"names":["newFun2","console","log"],"mappings":";;AAAA,IAAIA,OAAO,GAAG,SAAVA,OAAU,GAAM;AAChBC,EAAAA,OAAO,CAACC,GAAR,CAAY,GAAZ;AACH,CAFD;;AAGAF,OAAO","sourcesContent":["let newFun2 = () => {\r\n    console.log('b');\r\n}\r\nnewFun2();"],"file":"../js/gulptest2.js"}
