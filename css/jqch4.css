@@ -1,28 +1,2 @@
-.ad {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 250px;
-  height: 100px;
-  background: #000;
-  color: aliceblue;
-}
-
-.ad p {
-  padding: 30px;
-}
-
-.ad .ad-close {
-  position: absolute;
-  top: 0;
-  right: 0;
-  text-decoration: none;
-  background: red;
-  color: #fff;
-  padding: .5em;
-}
-
-.ad .ad-close:hover {
-  background: blue;
-}
+.ad{position:fixed;bottom:0;left:0;width:250px;height:100px;background:#000;color:#f0f8ff}.ad p{padding:30px}.ad .ad-close{position:absolute;top:0;right:0;text-decoration:none;background:red;color:#fff;padding:.5em}.ad .ad-close:hover{background:#00f}
 /*# sourceMappingURL=../maps/jqch4.css.map */

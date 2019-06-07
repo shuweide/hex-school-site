@@ -1,1 +1,1 @@
-{"version":3,"sources":["ch3.js"],"names":["document","getElementById","textContent"],"mappings":";;AAAAA,QAAQ,CAACC,cAAT,CAAwB,QAAxB,EAAkCC,WAAlC,GAA8C,QAA9C","sourcesContent":["document.getElementById('title1').textContent='修改後的標題';"],"file":"../js/ch3.js"}
+{"version":3,"sources":["ch3.js"],"names":["document","getElementById","textContent"],"mappings":"aAAAA,SAASC,eAAe,UAAUC,YAAY","file":"../js/ch3.js","sourcesContent":["document.getElementById('title1').textContent='修改後的標題';"]}

@@ -1,18 +1,2 @@
-.list a {
-  text-decoration: none;
-  color: gray;
-}
-
-.list a:hover {
-  color: #434343;
-}
-
-.list a:before {
-  margin-right: 15px;
-}
-
-.list li {
-  margin-bottom: 20px;
-  font-size: 40px;
-}
+.list a{text-decoration:none;color:gray}.list a:hover{color:#434343}.list a:before{margin-right:15px}.list li{margin-bottom:20px;font-size:40px}
 /*# sourceMappingURL=../maps/jqch7.css.map */
