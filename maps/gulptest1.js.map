@@ -1,0 +1,1 @@
+{"version":3,"sources":["gulptest1.js"],"names":["newFun","console"],"mappings":"aAAA,IAAIA,OAAS,aACTC","file":"../js/gulptest1.js","sourcesContent":["let newFun = () => {\r\n    console.log('a');\r\n}\r\nnewFun();"]}
