@@ -1,2 +1,2 @@
 "use strict";var body=document.body;function goRocket(e){switch(console.log(e),e.key){case"1":document.querySelector(".rocket-1").style.bottom="2000px";break;case"2":document.querySelector(".rocket-2").style.bottom="2000px";break;case"3":document.querySelector(".rocket-3").style.bottom="2000px";break;case"0":var t=!0,o=!1,r=void 0;try{for(var c,l=document.querySelectorAll(".rocket")[Symbol.iterator]();!(t=(c=l.next()).done);t=!0){c.value.style.bottom="0px"}}catch(e){o=!0,r=e}finally{try{t||null==l.return||l.return()}finally{if(o)throw r}}}}body.addEventListener("keydown",goRocket,!1);
-//# sourceMappingURL=maps/jsch10keycode.js.map
+//# sourceMappingURL=../maps/jsch10keycode.js.map
