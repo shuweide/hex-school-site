@@ -1,2 +1,2 @@
 "use strict";var screenX=document.querySelector(".screenX"),screenY=document.querySelector(".screenY"),pageX=document.querySelector(".pageX"),pageY=document.querySelector(".pageY"),clientX=document.querySelector(".clientX"),clientY=document.querySelector(".clientY"),mouseImg=document.querySelector(".mouseImg");function getPosition(e){screenX.textContent=e.screenX,screenY.textContent=e.screenY,pageX.textContent=e.pageX,pageY.textContent=e.pageY,clientX.textContent=e.clientX,clientY.textContent=e.clientY,mouseImg.style.left=e.clientX+"px",mouseImg.style.top=e.clientY+"px"}var el=document.body;el.addEventListener("mousemove",getPosition,!1);
-//# sourceMappingURL=../maps/jsch10position.js.map
+//# sourceMappingURL=maps/jsch10position.js.map

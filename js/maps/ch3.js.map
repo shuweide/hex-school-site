@@ -1,0 +1,1 @@
+{"version":3,"sources":["ch3.js"],"names":["document","getElementById","textContent"],"mappings":"aAAAA,SAASC,eAAe,UAAUC,YAAY","file":"../ch3.js","sourcesContent":["document.getElementById('title1').textContent='修改後的標題';"]}
