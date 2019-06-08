@@ -50,7 +50,7 @@ gulp.task('sass', () => {
     //編譯完成 CSS
     .pipe($.postcss([autoprefixer()]))
     .pipe($.if(options.env === 'prod', cleanCSS()))
-    .pipe($.sourcemaps.write('../maps'))
+    .pipe($.sourcemaps.write('./maps'))
     .pipe(gulp.dest('./public/css'))
     .pipe(browserSync.stream())
 });
@@ -61,7 +61,7 @@ gulp.task('css', () => {
     .pipe($.plumber())
     .pipe($.postcss([autoprefixer()]))
     .pipe($.if(options.env === 'prod', cleanCSS()))
-    .pipe($.sourcemaps.write('../maps'))
+    .pipe($.sourcemaps.write('./maps'))
     .pipe(gulp.dest('./public/css'));
 });
 
@@ -78,7 +78,7 @@ gulp.task('babel', () =>
         drop_console: false
       }
     })))
-    .pipe($.sourcemaps.write('../maps'))
+    .pipe($.sourcemaps.write('./maps'))
     .pipe(gulp.dest('./public/js'))
     .pipe(browserSync.stream())
 );
