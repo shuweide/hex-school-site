@@ -50,7 +50,7 @@ gulp.task('sass', () => {
     //編譯完成 CSS
     .pipe($.postcss([autoprefixer()]))
     .pipe($.if(options.env === 'prod', cleanCSS()))
-    .pipe($.sourcemaps.write('./maps'))
+    .pipe($.sourcemaps.write('../maps'))
     .pipe(gulp.dest('./public/css'))
     .pipe(browserSync.stream())
 });
@@ -61,7 +61,7 @@ gulp.task('css', () => {
     .pipe($.plumber())
     .pipe($.postcss([autoprefixer()]))
     .pipe($.if(options.env === 'prod', cleanCSS()))
-    .pipe($.sourcemaps.write('./maps'))
+    .pipe($.sourcemaps.write('../maps'))
     .pipe(gulp.dest('./public/css'));
 });
 
@@ -78,7 +78,7 @@ gulp.task('babel', () =>
         drop_console: false
       }
     })))
-    .pipe($.sourcemaps.write('./maps'))
+    .pipe($.sourcemaps.write('../maps'))
     .pipe(gulp.dest('./public/js'))
     .pipe(browserSync.stream())
 );
@@ -113,7 +113,7 @@ gulp.task('browser-sync', function () {
 
 //Clean Default
 gulp.task('clean', () => {
-  return gulp.src(['./.tmp', './public'], { read: false, allowEmpty: true })
+  return gulp.src(['./.tmp', './public','./.publish'], { read: false, allowEmpty: true })
     .pipe($.clean());
 });
 
@@ -124,9 +124,9 @@ gulp.task('image-min', () =>
     .pipe(gulp.dest('./public/images'))
 );
 
-//快速發布GitHub Pages
+//快速發布GitHub Pages，不發佈maps檔案
 gulp.task('deploy', function () {
-  return gulp.src('./public/**/*')
+  return gulp.src(['./public/**/*','!./public/maps/**/*'])
     .pipe($.ghPages());
 });
 
