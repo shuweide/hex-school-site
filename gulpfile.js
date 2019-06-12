@@ -35,6 +35,13 @@ gulp.task('copyCNAME', function () {
 gulp.task('jade', function () {
   return gulp.src('./jade/**/*.jade')
     .pipe($.plumber())
+    .pipe($.data(function () {
+      let menu = require('./data/menu.json');
+      let source = {
+        'menu': menu
+      };
+      return source;
+    }))
     .pipe($.jade({
       pretty: true
     }))
@@ -113,7 +120,7 @@ gulp.task('browser-sync', function () {
 
 //Clean Default
 gulp.task('clean', () => {
-  return gulp.src(['./.tmp', './public','./.publish'], { read: false, allowEmpty: true })
+  return gulp.src(['./.tmp', './public', './.publish'], { read: false, allowEmpty: true })
     .pipe($.clean());
 });
 
@@ -126,9 +133,10 @@ gulp.task('image-min', () =>
 
 //快速發布GitHub Pages，不發佈maps檔案
 gulp.task('deploy', function () {
-  return gulp.src(['./public/**/*','!./public/maps/**/*'])
+  return gulp.src(['./public/**/*', '!./public/maps/**/*'])
     .pipe($.ghPages());
 });
 
 //合併task
 gulp.task('default', gulp.series('clean', 'copyHTML', 'copyCNAME', 'jade', 'sass', 'css', 'babel', 'image-min', 'browser-sync'));
+gulp.task('test-jade', gulp.series('jade', 'browser-sync'));

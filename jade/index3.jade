@@ -1,10 +1,29 @@
-<!DOCTYPE html>
-html(lang="en")
-    head
-        meta(charset="UTF-8")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        meta(http-equiv="X-UA-Compatible", content="ie=edge")
-        title Index3
-        link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css")
-    body
-        h1 Content
+extend ../jade-partials/layout.jade
+
+mixin link(url, name)
+    li.nav-item
+        a.nav-link(href='#{ url }') Mixin#{ name }
+
+block content
+    ul
+        each item in menu.list
+            +link(item.url, item.name)
+            //- li  
+            //-     a(href="#{item.url}") #{item.name}
+    h1 
+        span Content
+        | Another content
+    ul
+        li
+            a(href="#") link
+        li
+            a(href="#") link
+        li
+            a(href="#") link
+    h1: a(href="#"): span 連結
+
+    hr
+    .container
+        form(action="")
+            label(for="email") 請輸入 Email
+            input#email.form-control.input-sm(type="text")   
