@@ -32,8 +32,8 @@ gulp.task('copyCNAME', function () {
     .pipe(gulp.dest('./public/'))
 });
 
-gulp.task('jade', function () {
-  return gulp.src('./jade/**/*.jade')
+gulp.task('pug', function () {
+  return gulp.src('./pug/**/*.pug')
     .pipe($.plumber())
     .pipe($.data(function () {
       let menu = require('./data/menu.json');
@@ -42,7 +42,7 @@ gulp.task('jade', function () {
       };
       return source;
     }))
-    .pipe($.jade({
+    .pipe($.pug({
       pretty: true
     }))
     .pipe(gulp.dest('./public/'))
@@ -114,7 +114,7 @@ gulp.task('browser-sync', function () {
 
   //監控檔案變化
   gulp.watch('./sass/**/*.scss', gulp.series('sass'));
-  gulp.watch('./jade/**/*.jade', gulp.series('jade'));
+  gulp.watch('./pug/**/*.pug', gulp.series('pug'));
   gulp.watch('./js/**/*.js', gulp.series('babel'));
 });
 
@@ -138,5 +138,5 @@ gulp.task('deploy', function () {
 });
 
 //合併task
-gulp.task('default', gulp.series('clean', 'copyHTML', 'copyCNAME', 'jade', 'sass', 'css', 'babel', 'image-min', 'browser-sync'));
-gulp.task('test-jade', gulp.series('jade', 'browser-sync'));
+gulp.task('default', gulp.series('clean', 'copyHTML', 'copyCNAME', 'pug', 'sass', 'css', 'babel', 'image-min', 'browser-sync'));
+gulp.task('test-pug', gulp.series('pug', 'browser-sync'));
