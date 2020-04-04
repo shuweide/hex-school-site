@@ -38,7 +38,7 @@
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
     "main-bower-files": "^2.13.1",
-    "minimist": "^1.2.2"
+    "minimist": "^1.2.3"
   },
   "browserslist": [
     "last 1 version",
